@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 
-from GME.core import *
+from Market.core import *
 
 
 class MarketMaker:
