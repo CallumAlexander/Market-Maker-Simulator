@@ -1,5 +1,8 @@
 import logging
 import random
+
+import numpy as np
+
 from GME.core import *
 
 
@@ -9,6 +12,7 @@ class MarketMaker:
         self.price = equity.price
         self.volatility = 0.2  # Fixed
         self.profit = 0
+        self.profit_history = np.empty(0)
         self.bid = self.price - 1
         self.ask = self.price + 1
 
@@ -19,31 +23,37 @@ class MarketMaker:
         self.equity.chart_history()
 
     def trade(self, side, quantity):
+        if side not in ["buy", "sell"]:
+            raise ValueError("Invalid side. Choose 'buy' or 'sell'.")
+
         if side == "buy":
             if quantity <= self.equity.price - self.ask:
-                self.price = self.price + 1
-                self.profit += (self.price - self.equity.price) * quantity
+                self.price += 1
+                self.profit += (self.ask - self.bid) * quantity
+                self.profit_history = np.append(self.profit_history, self.profit)
                 return quantity
             else:
                 return 0
+
         elif side == "sell":
             if quantity <= self.price - self.bid:
-                self.price = self.price - 1
-                self.profit += (self.equity.price - self.price) * quantity
+                self.price -= 1
+                self.profit += (self.ask - self.bid) * quantity
+                self.profit_history = np.append(self.profit_history, self.profit)
                 return quantity
             else:
                 return 0
 
 
 def main():
-    e = Equity(50, 0.2)
+    e = Equity(50, 0.2, "gme")
     market_maker = MarketMaker(e)
     for i in range(30):
         market_maker.simulate(1)
         side = random.choice(["buy", "sell"])
         quantity = random.randint(1, 10)
         traded_quantity = market_maker.trade(side, quantity)
-        print(traded_quantity)
+        print(market_maker.profit)
     market_maker.chart_history()
     print(market_maker.profit)
 
