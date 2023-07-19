@@ -13,7 +13,10 @@ class MarketMaker:
         self.volatility = 0.2  # Fixed
         self.profit = 0
         self.profit_history = np.empty(0)
+
+        # The bid price represents the maximum price the market maker is willing to pay to buy the security
         self.bid = self.price - 1
+        # the ask price represents the minimum price at which they are willing to sell it.
         self.ask = self.price + 1
 
     def simulate(self, days):
