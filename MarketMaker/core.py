@@ -14,6 +14,9 @@ class MarketMaker:
         self.profit = 0
         self.profit_history = np.empty(0)
 
+        self.inventory = 0
+        self.cash = 10000
+
         # The bid price represents the maximum price the market maker is willing to pay to buy the security
         self.bid = self.price - 1
         # the ask price represents the minimum price at which they are willing to sell it.
@@ -25,27 +28,37 @@ class MarketMaker:
     def chart_history(self):
         self.equity.chart_history()
 
-    def trade(self, side, quantity):
-        if side not in ["buy", "sell"]:
-            raise ValueError("Invalid side. Choose 'buy' or 'sell'.")
-
-        if side == "buy":
-            if quantity <= self.equity.price - self.ask:
-                self.price += 1
-                self.profit += (self.ask - self.bid) * quantity
-                self.profit_history = np.append(self.profit_history, self.profit)
-                return quantity
+    def execute_order(self, order):
+        if order.side == "buy":
+            if order.price >= self.ask:
+                cost = order.quantity * self.ask
+                if self.cash >= cost:
+                    # Buy the securities at the ask price
+                    self.inventory += order.quantity
+                    self.cash -= cost
+                    self.profit -= cost
+                    return True
+                else:
+                    # Insufficient cash to execute the order
+                    return False
             else:
-                return 0
-
-        elif side == "sell":
-            if quantity <= self.price - self.bid:
-                self.price -= 1
-                self.profit += (self.ask - self.bid) * quantity
-                self.profit_history = np.append(self.profit_history, self.profit)
-                return quantity
+                # Order not executed
+                return False
+        elif order.side == "sell":
+            if order.price <= self.bid:
+                if order.quantity <= self.inventory:
+                    # Sell the securities from the inventory at the bid price
+                    revenue = order.quantity * self.bid
+                    self.inventory -= order.quantity
+                    self.cash += revenue
+                    self.profit += revenue
+                    return True
+                else:
+                    # Not enough securities in inventory to execute the order
+                    return False
             else:
-                return 0
+                # Order not executed
+                return False
 
 
 def main():
