@@ -13,13 +13,12 @@ class Equity:
 
     def simulate(self, t):
         for day in range(t):
-            for day in range(t):
-                return_ = random.normalvariate(0, self.volatility)
-                if self.price * (1 + return_) <= 0:
-                    # Adjust return to prevent price from going below zero
-                    return_ = -self.price / self.price - 1
-                self.price *= (1 + return_)
-                self.history = np.append(self.history, self.price)
+            return_ = random.normalvariate(0, self.volatility)
+            if self.price * (1 + return_) <= 0:
+                # Adjust return to prevent price from going below zero
+                return_ = -self.price / self.price - 1
+            self.price *= (1 + return_)
+            self.history = np.append(self.history, self.price)
 
         return
 
