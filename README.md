@@ -58,6 +58,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#current-strategy">Current Trading Strategy</a> </li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -92,9 +93,28 @@ involvement in the drama, where it acted as a market maker for Robinhood trading
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Current Trading Strategy
 
+The trading strategy of the market maker is designed to facilitate the buying and selling of securities. When a "buy"
+order is received, the market maker checks if the order price is equal to or greater than their "ask" price (the minimum
+price they are willing to sell the securities for). If it meets this condition and they have enough cash to cover the
+purchase, they execute the order. The market maker then adds the purchased securities to their inventory and deducts the
+cost from their available cash.
 
+On the other hand, when a "sell" order is received, the market maker checks if the order price is equal to or less than
+their "bid" price (the maximum price they are willing to pay to buy the securities). If it meets this condition and they
+have enough securities in their inventory, they execute the order. The market maker then deducts the sold securities
+from their inventory and adds the revenue from the sale to their available cash.
 
+If the order conditions are not met (either for "buy" or "sell"), the market maker does not execute the order.
+
+This strategy allows the market maker to profit from the difference between their buying and selling prices, known as
+the bid-ask spread. By adjusting their bid and ask prices, the market maker can control the spread and manage their
+profitability. The strategy focuses on quick execution of trades and maintaining an inventory of securities to
+facilitate trading for buyers and sellers in the market.
+
+**Unfortunately, as per this current version of the simulation, this is not a very good strategy as it likes to take
+heavy losses!** (for now...)
 
 
 <!-- GETTING STARTED -->
