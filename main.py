@@ -9,3 +9,5 @@ if __name__ == "__main__":
     maker = MarketMaker(stock)
     for order in market.orders:
         print(maker.execute_order(order))
+
+    print("Profit: " + str(maker.profit))
