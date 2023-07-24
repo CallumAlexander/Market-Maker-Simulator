@@ -115,9 +115,36 @@ Under development
 
 ## Usage
 
-Under development
+### To run this Python project, follow the steps below:
 
-_For more examples, please refer to the [Documentation](https://example.com)_ which is currently a work in progress
+1. Ensure you have Python installed: Before running the project, make sure you have Python installed on your system. You
+   can download the latest version of Python from the official Python website (https://www.python.org/downloads/) and
+   follow the installation instructions.
+
+2. Set up the environment: It is recommended to create a virtual environment to manage project dependencies and isolate
+   them from other Python projects. Open a terminal or command prompt in the project directory and create a new virtual
+   environment: `python -m venv venv`
+
+3. Activate the virtual environment:
+    * On Windows: `venv\Scripts\activate`
+    * On macOS and Linux: `source venv/bin/activate`
+
+4. Install project dependencies: With the virtual environment activated, install the required project dependencies using
+   pip: `pip install -r requirements.txt`. Make sure you have the requirements.txt file containing the list of required
+   packages and their versions for the
+   project.
+5. Run the main script: Once the environment is set up and dependencies are installed, you can execute the main script
+   of
+   the project by running: `python main.py`.
+   The main.py file is the entry point of the project, and running this command will start the project's execution.
+6. Observe the output: Depending on the project's current state, this could be quite interesting or obscenely boring.
+
+To deactivate the virtual environment: When you are finished with the project, you can deactivate the virtual
+environment
+by running: `deactivate`
+
+_For more examples, please refer to the [Documentation](https://example.com)_ which is currently a work in progress, if
+at all existent.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -128,11 +155,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_ wh
 ## Roadmap
 
 - [ ] Update the README
-  - [ ] Update the installation section
-  - [ ] Update the prerequisites section
-  - [ ] Update the Usage section
+    - [ ] Update the installation section
+    - [ ] Update the prerequisites section
+    - [ ] Update the Usage section
 - [ ] Get a license
-  - Add license to the Readme
+    - Add license to the Readme
 
 See the [open issues](https://github.com/CallumAlexander/Market-Maker-Simulator/issues) for a full list of proposed
 features (and known issues).
